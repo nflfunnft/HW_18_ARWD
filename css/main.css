@@ -39,7 +39,7 @@ img {
   line-height: 1.6;
   font-weight: 600;
 }
-@media screen and (max-width: 992px) and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .title--h1 {
     font-size: 2.25rem;
   }
@@ -141,7 +141,7 @@ img {
     padding: 0;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    width: 75%;
+    width: 100%;
     gap: 0;
   }
 }
@@ -351,6 +351,8 @@ img {
 }
 .post-card__image img {
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .post-card__meta {
   display: -webkit-box;
@@ -386,6 +388,12 @@ img {
   margin-bottom: 90px;
   padding-top: 100px;
 }
+@media screen and (max-width: 768px) {
+  .hero {
+    min-height: 20rem;
+    padding-top: 2rem;
+  }
+}
 .hero__title {
   max-width: 770px;
   font-size: 3rem;
@@ -393,6 +401,11 @@ img {
   font-weight: 600;
 }
 @media screen and (max-width: 992px) and (min-width: 768px) {
+  .hero__title {
+    font-size: 2.25rem;
+  }
+}
+@media screen and (max-width: 768px) {
   .hero__title {
     font-size: 2.25rem;
   }
@@ -438,6 +451,49 @@ img {
       -ms-flex: 0 1 calc(33.3333333333% - 20px);
           flex: 0 1 calc(33.3333333333% - 20px);
 }
+@media screen and (max-width: 768px) {
+  .posts__grid {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .posts .post-card {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    gap: 30px;
+    padding: 30px 0;
+    border-bottom: 1px solid #E5E5E5;
+  }
+  .posts .post-card:nth-child(even) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
+  .posts .post-card__image {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 45%;
+            flex: 0 0 45%;
+    margin-bottom: 0;
+  }
+  .posts .post-card__image img {
+    height: 100%;
+  }
+  .posts .post-card__content {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
 
 .popular__header {
   display: -webkit-box;
@@ -470,6 +526,19 @@ img {
       -ms-flex: 0 1 calc(50% - 15px);
           flex: 0 1 calc(50% - 15px);
 }
+@media screen and (max-width: 768px) {
+  .popular__grid {
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .popular__grid {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
 .popular__actions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -492,10 +561,24 @@ img {
   display: flex;
   gap: 60px;
 }
+@media screen and (max-width: 768px) {
+  .info__inner {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 30px;
+  }
+}
 .info__person, .info__company {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+@media screen and (max-width: 768px) {
+  .info__company {
+    text-align: right;
+  }
 }
 .info__title {
   font-size: 24px;
