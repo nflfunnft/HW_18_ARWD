@@ -1,12 +1,14 @@
 // Colors
-$color-dark: #1D1D1D;
-$color-gray: #666666;
+$color-dark:       #1D1D1D;
+$color-gray:       #666666;
 $color-light-gray: #E5E5E5;
-$color-white: #FFFFFF;
-$color-charcoal: #4B4B4B;
+$color-white:      #FFFFFF;
+$color-charcoal:   #4B4B4B;
 
 // Typography
-$font-main: 'Inter', sans-serif;
+$font-main:  'Lato', sans-serif;        // основний текст
+$font-title: 'Red Hat Display', serif;  // заголовки
+$font-menu:  'Lato', sans-serif;        // меню
 
 // Layout
 $container-width: 1170px;
