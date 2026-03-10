@@ -1,0 +1,43 @@
+@use 'vars' as v;
+
+// ─── Flex helpers ───────────────────────────────────────────
+@mixin flex-between($align: center) {
+    display: flex;
+    justify-content: space-between;
+    align-items: $align;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+// ─── Typography ─────────────────────────────────────────────
+@mixin text-meta {
+    font-size: 12px;
+    color: v.$color-gray;
+}
+
+// ─── Section header (title + "View All" link) ────────────────
+@mixin section-header {
+    @include flex-between;
+    margin-top: v.$section-gap;
+    margin-bottom: 40px;
+}
+
+// ─── Grid layout ────────────────────────────────────────────
+@mixin grid-flex($cols, $gap: 30px) {
+    display: flex;
+    gap: $gap;
+    flex-wrap: wrap;
+
+    > * {
+        flex: 0 1 calc(#{100% / $cols} - #{$gap * ($cols - 1) / $cols});
+    }
+}
