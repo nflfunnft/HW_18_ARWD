@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'vars' as v;
 @use 'mixins' as m;
 
@@ -17,7 +18,14 @@ ol {
     list-style: none;
 }
 
-html,
+html {
+
+    // overflow-x тільки на html — не ламає position:fixed на відміну від body
+    @media screen and (max-width: 576px) {
+        overflow-x: hidden;
+    }
+}
+
 body {
     font-size: 16px;
     font-family: v.$font-main;
@@ -70,10 +78,10 @@ img {
     font-weight: 700;
 }
 
-// ─── Layout ──────────────────────────────────────
+// ─── Layout ─────────────────────────────────────
 .container {
     max-width: v.$container-width;
-    padding: 0 15px;
+    padding: 0 14px;
     margin: 0 auto;
 }
 
@@ -90,6 +98,8 @@ img {
 
 .header {
     padding: 44px 0;
+    position: relative; // щоб menu absolute позиціонувалось відносно header
+    z-index: 500; // header і меню вище main контенту
 
     @media screen and (max-width: 768px) {
         padding: 22px 0;
@@ -123,6 +133,7 @@ img {
         transition: all 0.5s;
         width: 100%;
         gap: 0;
+        z-index: 100;
     }
 
     &__item {
@@ -238,7 +249,7 @@ img {
         color: v.$color-white;
 
         &:hover {
-            background-color: lighten(v.$color-charcoal, 10%);
+            background-color: color.adjust(v.$color-charcoal, $lightness: 10%);
         }
     }
 }
@@ -534,5 +545,128 @@ img {
 
 // ─── Footer ─────────────────────────────────────
 .footer {
-    padding: 40px 0;
+    padding: 0 0;
+}
+
+// ═══════════════════════════════════════════════════════
+//  5. Mobile Slider (≤576px)
+// ═══════════════════════════════════════════════════════
+
+// radio інпути — завжди приховані на всіх розмірах
+.slide-input {
+    display: none;
+}
+
+// desktop main — видимий за замовчуванням
+.main--desktop {
+    display: block;
+}
+
+// mobile main — прихований за замовчуванням
+.main--mobile {
+    display: none;
+}
+
+// dots — завжди приховані поза мобайлом
+.slider__dots {
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+
+    // ── перемикаємо версії ──────────────────────────
+    .main--desktop {
+        display: none;
+    }
+
+    .main--mobile {
+        display: block;
+        width: 100vw;
+    }
+
+    // ── трек — всі слайди в рядок ───────────────────
+    .slider__track {
+        display: flex;
+        width: calc(9 * 100vw);
+        transform: translateX(0); // дефолт — перший слайд
+        transition: transform 0.45s ease;
+        will-change: transform;
+    }
+
+
+
+    // ── кожен слайд ─────────────────────────────────
+    .slide {
+        width: 100vw;
+        min-height: calc(100vh - 80px);
+        flex-shrink: 0;
+        box-sizing: border-box;
+        padding: 24px 15px 60px; // 15px зліва/справа щоб контент не прилипав
+        overflow-y: auto;
+    }
+
+    // ── hero слайд — фонове зображення ───────────────
+    #sl1 {
+        background: url('../assets/img/bg-image.webp') center / cover no-repeat;
+        padding-top: 40px;
+        display: flex;
+        align-items: flex-start;
+        max-height: 500px;
+    }
+
+    // ── мобільний вигляд blog-card ──────────────────
+    .blog-card--mobile {
+        flex-direction: column;
+
+        .blog-card__image {
+            width: 100%;
+            max-height: 220px;
+            overflow: hidden;
+        }
+    }
+
+    // ── мобільний вигляд post-card ──────────────────
+    .post-card--mobile {
+        flex-direction: column;
+
+        .post-card__image {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+    }
+
+    // ── крапки — fixed внизу ─────────────
+    .slider__dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        position: fixed;
+        bottom: 16px;
+        left: 0;
+        width: 100%;
+        z-index: 9999; // вище .menu (z-index ~100)
+        pointer-events: auto;
+    }
+
+    .slider__dot {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: v.$color-light-gray;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    // ── :has() — позиція треку + активна крапка ─────
+    // body:has(#sN:checked) — піднімаємось до body,
+    // знаходимо трек і крапку незалежно від DOM рівня
+    @for $i from 1 through 9 {
+        body:has(#s#{$i}:checked) .slider__track {
+            transform: translateX(#{($i - 1) * -100}vw);
+        }
+
+        @include m.slide-active($i);
+    }
 }

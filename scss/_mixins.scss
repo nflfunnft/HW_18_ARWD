@@ -1,6 +1,7 @@
+@use 'sass:math';
 @use 'vars' as v;
 
-// ─── Flex helpers ───────────────────────────────────────────
+// ─── Flex helpers ────────────────────────────────────────────
 @mixin flex-between($align: center) {
     display: flex;
     justify-content: space-between;
@@ -18,33 +19,41 @@
     flex-direction: column;
 }
 
-// ─── Typography ─────────────────────────────────────────────
+// ─── Typography ──────────────────────────────────────────────
 @mixin text-meta {
     font-size: 12px;
     color: v.$color-gray;
 }
 
-// ─── Font title (від вчителя) ────────────────────────────────
 @mixin font-title($fontSize, $lineHeight, $fontWeight) {
     font-size: $fontSize;
     line-height: $lineHeight;
     font-weight: $fontWeight;
 }
 
-// ─── Section header (title + "View All" link) ────────────────
+// ─── Section header ──────────────────────────────────────────
 @mixin section-header {
     @include flex-between;
     margin-top: v.$section-gap;
     margin-bottom: 40px;
 }
 
-// ─── Grid layout ────────────────────────────────────────────
+// ─── Grid layout ─────────────────────────────────────────────
 @mixin grid-flex($cols, $gap: 30px) {
     display: flex;
     gap: $gap;
     flex-wrap: wrap;
 
     > * {
-        flex: 0 1 calc(#{100% / $cols} - #{$gap * ($cols - 1) / $cols});
+        flex: 0 1 calc(#{math.div(100%, $cols)} - #{math.div($gap * ($cols - 1), $cols)});
+    }
+}
+
+// ─── Slider: активна крапка через body:has() ─────────────────
+// Викликається через @for в main.scss всередині @media ≤576px
+@mixin slide-active($n) {
+    body:has(#s#{$n}:checked) .slider__dot:nth-child(#{$n}) {
+        background-color: v.$color-dark;
+        transform: scale(1.4);
     }
 }

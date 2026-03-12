@@ -11,7 +11,12 @@ ol {
   list-style: none;
 }
 
-html,
+@media screen and (max-width: 576px) {
+  html {
+    overflow-x: hidden;
+  }
+}
+
 body {
   font-size: 16px;
   font-family: "Lato", sans-serif;
@@ -19,7 +24,6 @@ body {
   line-height: 1.5;
 }
 @media screen and (max-width: 576px) {
-  html,
   body {
     font-size: 16px;
   }
@@ -72,7 +76,7 @@ img {
 
 .container {
   max-width: 1170px;
-  padding: 0 15px;
+  padding: 0 14px;
   margin: 0 auto;
 }
 
@@ -91,6 +95,8 @@ img {
 
 .header {
   padding: 44px 0;
+  position: relative;
+  z-index: 500;
 }
 @media screen and (max-width: 768px) {
   .header {
@@ -143,6 +149,7 @@ img {
     transition: all 0.5s;
     width: 100%;
     gap: 0;
+    z-index: 100;
   }
 }
 @media screen and (max-width: 768px) {
@@ -602,5 +609,197 @@ img {
 }
 
 .footer {
-  padding: 40px 0;
+  padding: 0 0;
+}
+
+.slide-input {
+  display: none;
+}
+
+.main--desktop {
+  display: block;
+}
+
+.main--mobile {
+  display: none;
+}
+
+.slider__dots {
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .main--desktop {
+    display: none;
+  }
+  .main--mobile {
+    display: block;
+    width: 100vw;
+  }
+  .slider__track {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 900vw;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transition: -webkit-transform 0.45s ease;
+    transition: -webkit-transform 0.45s ease;
+    transition: transform 0.45s ease;
+    transition: transform 0.45s ease, -webkit-transform 0.45s ease;
+    will-change: transform;
+  }
+  .slide {
+    width: 100vw;
+    min-height: calc(100vh - 80px);
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 24px 15px 60px;
+    overflow-y: auto;
+  }
+  #sl1 {
+    background: url("../assets/img/bg-image.webp") center/cover no-repeat;
+    padding-top: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    max-height: 500px;
+  }
+  .blog-card--mobile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .blog-card--mobile .blog-card__image {
+    width: 100%;
+    max-height: 220px;
+    overflow: hidden;
+  }
+  .post-card--mobile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .post-card--mobile .post-card__image {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .slider__dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    pointer-events: auto;
+  }
+  .slider__dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #E5E5E5;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+    transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
+  }
+  body:has(#s1:checked) .slider__track {
+    -webkit-transform: translateX(0vw);
+            transform: translateX(0vw);
+  }
+  body:has(#s1:checked) .slider__dot:nth-child(1) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s2:checked) .slider__track {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+  }
+  body:has(#s2:checked) .slider__dot:nth-child(2) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s3:checked) .slider__track {
+    -webkit-transform: translateX(-200vw);
+            transform: translateX(-200vw);
+  }
+  body:has(#s3:checked) .slider__dot:nth-child(3) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s4:checked) .slider__track {
+    -webkit-transform: translateX(-300vw);
+            transform: translateX(-300vw);
+  }
+  body:has(#s4:checked) .slider__dot:nth-child(4) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s5:checked) .slider__track {
+    -webkit-transform: translateX(-400vw);
+            transform: translateX(-400vw);
+  }
+  body:has(#s5:checked) .slider__dot:nth-child(5) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s6:checked) .slider__track {
+    -webkit-transform: translateX(-500vw);
+            transform: translateX(-500vw);
+  }
+  body:has(#s6:checked) .slider__dot:nth-child(6) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s7:checked) .slider__track {
+    -webkit-transform: translateX(-600vw);
+            transform: translateX(-600vw);
+  }
+  body:has(#s7:checked) .slider__dot:nth-child(7) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s8:checked) .slider__track {
+    -webkit-transform: translateX(-700vw);
+            transform: translateX(-700vw);
+  }
+  body:has(#s8:checked) .slider__dot:nth-child(8) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  body:has(#s9:checked) .slider__track {
+    -webkit-transform: translateX(-800vw);
+            transform: translateX(-800vw);
+  }
+  body:has(#s9:checked) .slider__dot:nth-child(9) {
+    background-color: #1D1D1D;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
 }/*# sourceMappingURL=main.css.map */
